@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  Time Frame — Privacy Manifest (macOS app target).
+
+	  Time Frame is a local-first Pomodoro/productivity app. It does not track
+	  users, contains no advertising/analytics SDKs, and transmits no data off
+	  the device: all session history and preferences live in an on-device
+	  SwiftData store and in UserDefaults. iCloud/CloudKit mirroring is present
+	  in the codebase but is DISABLED in the shipping build (personal Apple
+	  team; CloudKitCapability.entitledInThisBuild == false), so no data leaves
+	  the device. Hence NSPrivacyCollectedDataTypes is empty.
+
+	  Required-reason API: UserDefaults.
+	    CA92.1 — read/write information accessible only to the app itself
+	             (e.g. Notification/MenuBar/Calendar/LiveActivity preferences).
+	    1C8F.1 — read/write information accessible only to apps and app
+	             extensions that are members of the same App Group
+	             (group.abirbarman.com.time-frame — the widget projection).
+	-->
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+				<string>1C8F.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

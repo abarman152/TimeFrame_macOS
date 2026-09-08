@@ -1,0 +1,682 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 110;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1100000000000000000000C /* TimeFrameWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A11000000000000000000002 /* TimeFrameWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A11000000000000000000A0 /* WidgetProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F0 /* WidgetProjection.swift */; };
+		A11000000000000000000A1 /* WidgetProjectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F1 /* WidgetProjectionState.swift */; };
+		A11000000000000000000A2 /* WidgetDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F2 /* WidgetDeepLink.swift */; };
+		A11000000000000000000A3 /* WidgetProjectionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F3 /* WidgetProjectionStore.swift */; };
+		A11000000000000000000A4 /* WidgetTimelinePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F4 /* WidgetTimelinePolicy.swift */; };
+		A11000000000000000000A5 /* TimeFrameWidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F5 /* TimeFrameWidgetConfiguration.swift */; };
+		A11000000000000000000A6 /* WidgetTimelineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F6 /* WidgetTimelineBuilder.swift */; };
+		A11000000000000000000A7 /* TimeFrameWidgetConfigurationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F7 /* TimeFrameWidgetConfigurationIntent.swift */; };
+		A11000000000000000000A8 /* WidgetControlIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F8 /* WidgetControlIntents.swift */; };
+		A11000000000000000000A9 /* LiveSessionProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F9 /* LiveSessionProjection.swift */; };
+		A11000000000000000000AA /* LiveActivityPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000FA /* LiveActivityPresentation.swift */; };
+		A11000000000000000000AB /* AccessoryWidgetPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000FB /* AccessoryWidgetPresentation.swift */; };
+		A11000000000000000000AC /* ControlCenterPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000FC /* ControlCenterPresentation.swift */; };
+		A11000000000000000000B0 /* WidgetProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F0 /* WidgetProjection.swift */; };
+		A11000000000000000000B1 /* WidgetProjectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F1 /* WidgetProjectionState.swift */; };
+		A11000000000000000000B2 /* WidgetDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F2 /* WidgetDeepLink.swift */; };
+		A11000000000000000000B3 /* WidgetProjectionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F3 /* WidgetProjectionStore.swift */; };
+		A11000000000000000000B4 /* WidgetTimelinePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F4 /* WidgetTimelinePolicy.swift */; };
+		A11000000000000000000B5 /* TimeFrameWidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F5 /* TimeFrameWidgetConfiguration.swift */; };
+		A11000000000000000000B6 /* WidgetTimelineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F6 /* WidgetTimelineBuilder.swift */; };
+		A11000000000000000000B7 /* TimeFrameWidgetConfigurationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F7 /* TimeFrameWidgetConfigurationIntent.swift */; };
+		A11000000000000000000B8 /* WidgetControlIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F8 /* WidgetControlIntents.swift */; };
+		A11000000000000000000B9 /* LiveSessionProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000F9 /* LiveSessionProjection.swift */; };
+		A11000000000000000000BA /* LiveActivityPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000FA /* LiveActivityPresentation.swift */; };
+		A11000000000000000000BB /* AccessoryWidgetPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000FB /* AccessoryWidgetPresentation.swift */; };
+		A11000000000000000000BC /* ControlCenterPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000FC /* ControlCenterPresentation.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1100000000000000000000E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DAEF8C4302D9DBD0091744B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A11000000000000000000001;
+			remoteInfo = TimeFrameWidgets;
+		};
+		FEEDFACE000000000000000B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DAEF8C4302D9DBD0091744B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1DAEF8CB302D9DBD0091744B;
+			remoteInfo = time_frame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A1100000000000000000000B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			dstPath = "";
+			dstSubfolder = PlugIns;
+			files = (
+				A1100000000000000000000C /* TimeFrameWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1DAEF8CC302D9DBD0091744B /* time_frame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = time_frame.app; path = "Time Frame.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A11000000000000000000002 /* TimeFrameWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimeFrameWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A11000000000000000000F0 /* WidgetProjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetProjection.swift; sourceTree = "<group>"; };
+		A11000000000000000000F1 /* WidgetProjectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetProjectionState.swift; sourceTree = "<group>"; };
+		A11000000000000000000F2 /* WidgetDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDeepLink.swift; sourceTree = "<group>"; };
+		A11000000000000000000F3 /* WidgetProjectionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetProjectionStore.swift; sourceTree = "<group>"; };
+		A11000000000000000000F4 /* WidgetTimelinePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTimelinePolicy.swift; sourceTree = "<group>"; };
+		A11000000000000000000F5 /* TimeFrameWidgetConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFrameWidgetConfiguration.swift; sourceTree = "<group>"; };
+		A11000000000000000000F6 /* WidgetTimelineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTimelineBuilder.swift; sourceTree = "<group>"; };
+		A11000000000000000000F7 /* TimeFrameWidgetConfigurationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFrameWidgetConfigurationIntent.swift; sourceTree = "<group>"; };
+		A11000000000000000000F8 /* WidgetControlIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetControlIntents.swift; sourceTree = "<group>"; };
+		A11000000000000000000F9 /* LiveSessionProjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionProjection.swift; sourceTree = "<group>"; };
+		A11000000000000000000FA /* LiveActivityPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityPresentation.swift; sourceTree = "<group>"; };
+		A11000000000000000000FB /* AccessoryWidgetPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryWidgetPresentation.swift; sourceTree = "<group>"; };
+		A11000000000000000000FC /* ControlCenterPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterPresentation.swift; sourceTree = "<group>"; };
+		FEEDFACE0000000000000001 /* time_frameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = time_frameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1DAEF8CE302D9DBD0091744B /* time_frame */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = time_frame;
+			sourceTree = "<group>";
+		};
+		A11000000000000000000006 /* TimeFrameWidgets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TimeFrameWidgets;
+			sourceTree = "<group>";
+		};
+		C0DE000000000000000000C1 /* Core */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Core;
+			sourceTree = "<group>";
+		};
+		FEEDFACE0000000000000002 /* time_frameTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = time_frameTests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1DAEF8C9302D9DBD0091744B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		A11000000000000000000004 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		FEEDFACE0000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1DAEF8C3302D9DBD0091744B = {
+			isa = PBXGroup;
+			children = (
+				A1100000000000000000000A /* Shared */,
+				C0DE000000000000000000C1 /* Core */,
+				1DAEF8CE302D9DBD0091744B /* time_frame */,
+				A11000000000000000000006 /* TimeFrameWidgets */,
+				FEEDFACE0000000000000002 /* time_frameTests */,
+				1DAEF8CD302D9DBD0091744B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1DAEF8CD302D9DBD0091744B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1DAEF8CC302D9DBD0091744B /* time_frame.app */,
+				A11000000000000000000002 /* TimeFrameWidgets.appex */,
+				FEEDFACE0000000000000001 /* time_frameTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1100000000000000000000A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A11000000000000000000F0 /* WidgetProjection.swift */,
+				A11000000000000000000F1 /* WidgetProjectionState.swift */,
+				A11000000000000000000F2 /* WidgetDeepLink.swift */,
+				A11000000000000000000F3 /* WidgetProjectionStore.swift */,
+				A11000000000000000000F4 /* WidgetTimelinePolicy.swift */,
+				A11000000000000000000F5 /* TimeFrameWidgetConfiguration.swift */,
+				A11000000000000000000F6 /* WidgetTimelineBuilder.swift */,
+				A11000000000000000000F7 /* TimeFrameWidgetConfigurationIntent.swift */,
+				A11000000000000000000F8 /* WidgetControlIntents.swift */,
+				A11000000000000000000F9 /* LiveSessionProjection.swift */,
+				A11000000000000000000FA /* LiveActivityPresentation.swift */,
+				A11000000000000000000FB /* AccessoryWidgetPresentation.swift */,
+				A11000000000000000000FC /* ControlCenterPresentation.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1DAEF8CB302D9DBD0091744B /* time_frame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DAEF8D7302D9DC00091744B /* Build configuration list for PBXNativeTarget "time_frame" */;
+			buildPhases = (
+				1DAEF8C8302D9DBD0091744B /* Sources */,
+				1DAEF8C9302D9DBD0091744B /* Frameworks */,
+				1DAEF8CA302D9DBD0091744B /* Resources */,
+				A1100000000000000000000B /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1100000000000000000000D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1DAEF8CE302D9DBD0091744B /* time_frame */,
+				C0DE000000000000000000C1 /* Core */,
+			);
+			name = time_frame;
+			productName = time_frame;
+			productReference = 1DAEF8CC302D9DBD0091744B /* time_frame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A11000000000000000000001 /* TimeFrameWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A11000000000000000000007 /* Build configuration list for PBXNativeTarget "TimeFrameWidgets" */;
+			buildPhases = (
+				A11000000000000000000003 /* Sources */,
+				A11000000000000000000004 /* Frameworks */,
+				A11000000000000000000005 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				A11000000000000000000006 /* TimeFrameWidgets */,
+			);
+			name = TimeFrameWidgets;
+			productName = TimeFrameWidgets;
+			productReference = A11000000000000000000002 /* TimeFrameWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		FEEDFACE0000000000000003 /* time_frameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEEDFACE0000000000000007 /* Build configuration list for PBXNativeTarget "time_frameTests" */;
+			buildPhases = (
+				FEEDFACE0000000000000004 /* Sources */,
+				FEEDFACE0000000000000005 /* Frameworks */,
+				FEEDFACE0000000000000006 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FEEDFACE000000000000000A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FEEDFACE0000000000000002 /* time_frameTests */,
+			);
+			name = time_frameTests;
+			productName = time_frameTests;
+			productReference = FEEDFACE0000000000000001 /* time_frameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1DAEF8C4302D9DBD0091744B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					1DAEF8CB302D9DBD0091744B = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					A11000000000000000000001 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					FEEDFACE0000000000000003 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 1DAEF8CB302D9DBD0091744B;
+					};
+				};
+			};
+			buildConfigurationList = 1DAEF8C7302D9DBD0091744B /* Build configuration list for PBXProject "time_frame" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1DAEF8C3302D9DBD0091744B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1DAEF8CD302D9DBD0091744B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1DAEF8CB302D9DBD0091744B /* time_frame */,
+				A11000000000000000000001 /* TimeFrameWidgets */,
+				FEEDFACE0000000000000003 /* time_frameTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1DAEF8CA302D9DBD0091744B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		A11000000000000000000005 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		FEEDFACE0000000000000006 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1DAEF8C8302D9DBD0091744B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+				A11000000000000000000A0 /* WidgetProjection.swift in Sources */,
+				A11000000000000000000A1 /* WidgetProjectionState.swift in Sources */,
+				A11000000000000000000A2 /* WidgetDeepLink.swift in Sources */,
+				A11000000000000000000A3 /* WidgetProjectionStore.swift in Sources */,
+				A11000000000000000000A4 /* WidgetTimelinePolicy.swift in Sources */,
+				A11000000000000000000A5 /* TimeFrameWidgetConfiguration.swift in Sources */,
+				A11000000000000000000A6 /* WidgetTimelineBuilder.swift in Sources */,
+				A11000000000000000000A7 /* TimeFrameWidgetConfigurationIntent.swift in Sources */,
+				A11000000000000000000A8 /* WidgetControlIntents.swift in Sources */,
+				A11000000000000000000A9 /* LiveSessionProjection.swift in Sources */,
+				A11000000000000000000AA /* LiveActivityPresentation.swift in Sources */,
+				A11000000000000000000AB /* AccessoryWidgetPresentation.swift in Sources */,
+				A11000000000000000000AC /* ControlCenterPresentation.swift in Sources */,
+			);
+		};
+		A11000000000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+				A11000000000000000000B0 /* WidgetProjection.swift in Sources */,
+				A11000000000000000000B1 /* WidgetProjectionState.swift in Sources */,
+				A11000000000000000000B2 /* WidgetDeepLink.swift in Sources */,
+				A11000000000000000000B3 /* WidgetProjectionStore.swift in Sources */,
+				A11000000000000000000B4 /* WidgetTimelinePolicy.swift in Sources */,
+				A11000000000000000000B5 /* TimeFrameWidgetConfiguration.swift in Sources */,
+				A11000000000000000000B6 /* WidgetTimelineBuilder.swift in Sources */,
+				A11000000000000000000B7 /* TimeFrameWidgetConfigurationIntent.swift in Sources */,
+				A11000000000000000000B8 /* WidgetControlIntents.swift in Sources */,
+				A11000000000000000000B9 /* LiveSessionProjection.swift in Sources */,
+				A11000000000000000000BA /* LiveActivityPresentation.swift in Sources */,
+				A11000000000000000000BB /* AccessoryWidgetPresentation.swift in Sources */,
+				A11000000000000000000BC /* ControlCenterPresentation.swift in Sources */,
+			);
+		};
+		FEEDFACE0000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A1100000000000000000000D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A11000000000000000000001 /* TimeFrameWidgets */;
+			targetProxy = A1100000000000000000000E /* PBXContainerItemProxy */;
+		};
+		FEEDFACE000000000000000A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1DAEF8CB302D9DBD0091744B /* time_frame */;
+			targetProxy = FEEDFACE000000000000000B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DAEF8D5302D9DC00091744B /* Debug configuration for PBXProject "time_frame" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = SUDJAF8XLZ;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1DAEF8D6302D9DC00091744B /* Release configuration for PBXProject "time_frame" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SUDJAF8XLZ;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		1DAEF8D8302D9DC00091744B /* Debug configuration for PBXNativeTarget "time_frame" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = time_frame/time_frame.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SUDJAF8XLZ;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "time_frame-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Time Frame";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Time Frame adds and updates events for your focus plans and sessions in the calendar you choose.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2026 Abir Barman. MIT Licensed.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abirbarman.com.time-frame";
+				PRODUCT_MODULE_NAME = time_frame;
+				PRODUCT_NAME = "Time Frame";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1DAEF8D9302D9DC00091744B /* Release configuration for PBXNativeTarget "time_frame" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = time_frame/time_frame.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SUDJAF8XLZ;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "time_frame-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Time Frame";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Time Frame adds and updates events for your focus plans and sessions in the calendar you choose.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2026 Abir Barman. MIT Licensed.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abirbarman.com.time-frame";
+				PRODUCT_MODULE_NAME = time_frame;
+				PRODUCT_NAME = "Time Frame";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A11000000000000000000008 /* Debug configuration for PBXNativeTarget "TimeFrameWidgets" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TimeFrameWidgets/TimeFrameWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SUDJAF8XLZ;
+				ENABLE_APP_SANDBOX = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "TimeFrameWidgets-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abirbarman.com.time-frame.TimeFrameWidgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A11000000000000000000009 /* Release configuration for PBXNativeTarget "TimeFrameWidgets" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TimeFrameWidgets/TimeFrameWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SUDJAF8XLZ;
+				ENABLE_APP_SANDBOX = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "TimeFrameWidgets-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abirbarman.com.time-frame.TimeFrameWidgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FEEDFACE0000000000000008 /* Debug configuration for PBXNativeTarget "time_frameTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SUDJAF8XLZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abirbarman.com.time-frameTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Time Frame.app/Contents/MacOS/Time Frame";
+			};
+			name = Debug;
+		};
+		FEEDFACE0000000000000009 /* Release configuration for PBXNativeTarget "time_frameTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SUDJAF8XLZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abirbarman.com.time-frameTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Time Frame.app/Contents/MacOS/Time Frame";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DAEF8C7302D9DBD0091744B /* Build configuration list for PBXProject "time_frame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DAEF8D5302D9DC00091744B /* Debug configuration for PBXProject "time_frame" */,
+				1DAEF8D6302D9DC00091744B /* Release configuration for PBXProject "time_frame" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		1DAEF8D7302D9DC00091744B /* Build configuration list for PBXNativeTarget "time_frame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DAEF8D8302D9DC00091744B /* Debug configuration for PBXNativeTarget "time_frame" */,
+				1DAEF8D9302D9DC00091744B /* Release configuration for PBXNativeTarget "time_frame" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		A11000000000000000000007 /* Build configuration list for PBXNativeTarget "TimeFrameWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A11000000000000000000008 /* Debug configuration for PBXNativeTarget "TimeFrameWidgets" */,
+				A11000000000000000000009 /* Release configuration for PBXNativeTarget "TimeFrameWidgets" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		FEEDFACE0000000000000007 /* Build configuration list for PBXNativeTarget "time_frameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEEDFACE0000000000000008 /* Debug configuration for PBXNativeTarget "time_frameTests" */,
+				FEEDFACE0000000000000009 /* Release configuration for PBXNativeTarget "time_frameTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1DAEF8C4302D9DBD0091744B /* Project object */;
+	validationLevel = 1;
+}

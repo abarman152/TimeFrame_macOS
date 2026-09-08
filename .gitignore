@@ -1,0 +1,86 @@
+# Time Frame — ignored paths
+#
+# Scope note: the git repository root is this directory (`time_frame/`), not its parent, so
+# every path below is relative to the Xcode project's own folder.
+
+# ---------------------------------------------------------------------------
+# macOS filesystem noise
+# ---------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# ---------------------------------------------------------------------------
+# Xcode user state
+# ---------------------------------------------------------------------------
+# Per-developer window layout, breakpoints, and scheme ordering. These change on
+# every launch and conflict constantly; the *shared* schemes under
+# xcshareddata/ are deliberately NOT ignored, because the project depends on the
+# `time_frame`, `TimeFrameiOS`, `TimeFrameWidgets` and `TimeFrameiOSWidgets`
+# schemes existing for anyone who clones it.
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+*.pbxuser
+
+# ---------------------------------------------------------------------------
+# Build products and derived data
+# ---------------------------------------------------------------------------
+build/
+DerivedData/
+*.o
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.app
+*.appex
+*.xcarchive
+*.xcresult
+*.swiftmodule
+*.swiftsourceinfo
+
+# ---------------------------------------------------------------------------
+# Swift Package Manager
+# ---------------------------------------------------------------------------
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+
+# ---------------------------------------------------------------------------
+# Signing material — never commit these
+# ---------------------------------------------------------------------------
+# A provisioning profile embeds a team id and device ids; a .p12 embeds a private
+# key. Neither belongs in a public repository, and `ProductionReadinessM19Tests`
+# audits the tree for committed secrets.
+*.mobileprovision
+*.provisionprofile
+*.p12
+*.cer
+*.certSigningRequest
+
+# ---------------------------------------------------------------------------
+# Local configuration and editor state
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*~
+
+# ---------------------------------------------------------------------------
+# Deliberately NOT ignored
+# ---------------------------------------------------------------------------
+# *.entitlements        — part of the app's capabilities, must be tracked
+# *.xcodeproj/project.pbxproj — the project itself
+# Assets.xcassets/      — including the app icons
