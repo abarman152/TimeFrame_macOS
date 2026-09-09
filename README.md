@@ -1,286 +1,432 @@
 <div align="center">
 
-<img src="docs/assets/time-frame-logo.png" alt="Time Frame" width="120">
+<img src="docs/assets/app-icon.png" alt="Time Frame" width="112">
 
 # Time Frame
 
-**A native macOS Pomodoro focus timer, built around one authoritative clock.**
+**A focused time-management system for macOS.**
 
-[![Platform](https://img.shields.io/badge/Platform-macOS%2027-black)](#platform-support)
-[![Swift](https://img.shields.io/badge/Swift-6.4%20toolchain%20%7C%205%20language%20mode-orange)](#requirements)
-[![Xcode](https://img.shields.io/badge/Xcode-27.0-blue)](#requirements)
-[![UI](https://img.shields.io/badge/UI-SwiftUI-blue)](#architecture)
-[![Persistence](https://img.shields.io/badge/Persistence-SwiftData%20V7-purple)](#persistence)
+[![Platform](https://img.shields.io/badge/Platform-macOS%2027-black)](#requirements)
+[![Swift](https://img.shields.io/badge/Swift-6.4%20toolchain-orange)](#requirements)
+[![SwiftUI](https://img.shields.io/badge/UI-SwiftUI-blue)](#architecture)
+[![Status](https://img.shields.io/badge/Status-1.0%20source%20release-brightgreen)](#project-status)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
-[![Tests](https://img.shields.io/badge/Tests-macOS%201020-brightgreen)](#testing)
 
+</div>
+
+Time Frame is a native macOS application for planning focused work, structuring your day, and
+building productivity habits that hold up over weeks rather than minutes. It runs Pomodoro-style
+focus sessions — but the timer is the smallest part of it. Around that timer sit the things that
+make focused work repeatable: your own interval structures, saved workflows you can start in one
+click, ordered plans for work that is not a uniform repetition, your calendar, and a history that
+tells you what actually happened.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/active-session.png" alt="Time Frame macOS productivity dashboard showing an active focused work session with the remaining time, session position, and transport controls" width="900">
 </div>
 
 ---
 
-## Overview
+## Contents
 
-Time Frame runs Pomodoro-style focus sessions: you choose how long to concentrate, and it takes you
-through focus intervals and breaks, recording what you actually completed.
+- [Why Time Frame](#why-time-frame)
+- [A month with Time Frame](#a-month-with-time-frame)
+- [How it fits together](#how-it-fits-together)
+- [Feature reference](#feature-reference)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Testing](#testing)
+- [Architecture](#architecture)
+- [Privacy](#privacy)
+- [Project status](#project-status)
+- [Documentation](#documentation)
+- [License](#license)
 
-The engineering idea behind it is that a timer should be trustworthy. Time Frame derives elapsed time
-from real timestamps rather than counting ticks, so sleep, backgrounding, locking and relaunch are
-ordinary cases rather than special ones. There is exactly **one** timer engine in a running app, and
-every system surface Apple offers — Home Screen and Lock Screen widgets, Control Center controls, Live
-Activities, App Shortcuts, notifications, the macOS menu bar — is either a read-only projection of
-that engine or a thin command adapter back into it. Nothing owns a second clock.
+---
 
-It is not a cross-platform wrapper. The macOS app and the iOS app are separate native targets that
-compile the same platform-neutral domain core.
+## Why Time Frame
 
-## User guide
+### Focus structures that match how you actually work
 
-New to Time Frame, or want to know which feature to use when?
-
-- **[macOS User Guide](docs/35-MACOS-USER-GUIDE.md)** — the Mac manual: every screen and setting, a
-  [Choosing the right feature](docs/35-MACOS-USER-GUIDE.md#3-choosing-the-right-feature) decision
-  table, [keyboard shortcuts](docs/35-MACOS-USER-GUIDE.md#23-keyboard-shortcuts),
-  [a workday walkthrough](docs/35-MACOS-USER-GUIDE.md#24-a-workday-with-time-frame),
-  [troubleshooting](docs/35-MACOS-USER-GUIDE.md#25-troubleshooting) and an FAQ.
-- **[macOS User Guide](docs/35-MACOS-USER-GUIDE.md)** — every screen, in order.
-
-## Features
-
-- Pomodoro focus sessions with configurable focus, short-break and long-break intervals
-- Saved timer configurations, with a default used by new sessions
-- Task templates and multi-configuration session plans, each with a chosen icon
-- Quick Start: pin the templates and plans you use most and launch them from the macOS menu bar
-- Session history that preserves the configuration name each session ran under
-- Today summary and a Statistics dashboard over day, week and month
-- Home Screen widgets in three sizes and three modes, with interactive controls
-- Lock Screen accessory widgets: circular, rectangular and inline
-- StandBy support through the existing Home Screen widgets
-- Live Activities with Dynamic Island presentation
-- Control Center controls, including a configurable quick-start control
-- Local notifications anchored to interval boundaries, with action buttons
-- App Intents and App Shortcuts for Siri and system automation
-- A macOS menu bar popover with the full transport controls, Quick Start, and a gear menu for
-  secondary actions, plus an optional live countdown in the status item
-- Calendar integration on macOS
-- Open at Login, and a single main window that every entry point reuses
-- VoiceOver labels, Dynamic Type support, and state never carried by colour alone
-
-## How it works
-
-1. Create a configuration on macOS, or use the "Classic Pomodoro" one Time Frame seeds on first
-   launch.
-2. Start a session. Time Frame runs focus intervals and breaks in order.
-3. Pause, resume, skip, restart or stop at any point, from the app, a widget, Control Center, a
-   notification, the Live Activity, or Siri.
-4. The session completes on its own, and is recorded in History.
-5. Today and Statistics summarise what you actually completed.
-
-## Platform support
-
-| Platform | Minimum | Status |
-|---|---|---|
-| macOS | 27 | Full application, verified on real hardware |
-
-**This repository contains the macOS application only.** Time Frame also has an iOS and iPadOS
-companion — Live Activities, Lock Screen widgets and Control Center controls — built from the same
-shared `Core/`. That companion is not part of this repository.
-
-Live Activities and Control Center controls do not exist on macOS: Apple does not offer ActivityKit
-or `ControlWidget` to native Mac applications.
-
-| Capability | macOS |
-|---|---|
-| Focus timer | Yes |
-| Configurations, templates and plans | Yes |
-| Today, History, Statistics | Yes |
-| Home Screen widgets | Yes |
-| Local notifications | Yes |
-| Menu bar popover with Quick Start | Yes |
-| Calendar integration | Yes |
-| App Intents and Shortcuts | Yes |
-| Open at Login | Yes |
-| iCloud sync | Disabled (needs a paid Apple Developer team) |
-
-
-## Screens
-
-The macOS window is a sidebar split view. Every screen opens with the same header — a title, one line
-of guidance, and, where useful, a single control on the right — and groups related content into the
-same card surface, so the eight areas read as one application.
-
-### Timer
-
-The primary screen, and the only place a session is started from the app.
-
-When nothing is running it asks four things, in the order you decide them: what you are focusing on
-(with a **Recent Tasks** menu that fills the field from your own history), which configuration to
-run, how many focus sessions, and then it previews the exact interval sequence before you commit.
-The preview has a **Show** filter (All Sessions / Focus Only / Breaks Only) which changes only what
-is listed, never what runs. **Quick Start** sits in the header for the times you already know which
-saved timer you want.
-
-While a session runs the screen becomes the countdown, the phase, the paused state, the session
-position, what is next, and the transport controls: Pause or Resume, Skip, Restart, Stop.
-
-The countdown is derived from the engine's timestamps, not counted. Sleeping, locking, closing the
-window or relaunching does not lose time.
+A Pomodoro configuration in Time Frame is a full description of a working rhythm: focus length,
+short break, long break, how many focus sessions, and how often a long break falls. Focus
+intervals run from 1 minute to 8 hours, breaks from 0 minutes to 8 hours, up to 24 focus sessions
+in a run, with a long break every 1 to 12 sessions. Nothing forces your work into 25 and 5.
 
 ### Templates
 
-Reusable focus setups for work you come back to: a name, the task the session will focus on, a
-configuration to run, a default number of sessions, and an icon.
-
-A template **references** its configuration rather than copying it, and starting from a template
-**copies** its values into the ordinary setup path — so the running session is independent of the
-template, and editing or deleting the template later never disturbs a session or your history.
-
-The list supports search, and each row starts the template or opens its overflow menu directly. The
-detail page has one prominent action (Start), a secondary Create Plan, a switch for pinning to Quick
-Start, and a quieter Manage group for Duplicate and Delete.
+Save a complete focus setup — the task, the configuration, the number of sessions, an icon — and
+start it again tomorrow without rebuilding anything.
 
 ### Plans
 
-For a session that is not a uniform repetition: an explicit, ordered timeline of focus intervals and
+For work that is not a uniform repetition: an explicit, ordered timeline of focus intervals and
 breaks, where each focus interval may use a **different** configuration.
-
-Starting a plan freezes it into an immutable snapshot and runs that through the same engine, so
-editing or deleting the plan afterwards cannot change a session that is already running or already
-recorded. The list shows each plan's session count, total duration and configuration ("Custom" when
-it deliberately mixes them); the detail page lists every interval with its start offset.
-
-### Configurations
-
-The durations your timers run on: focus, short break, long break, how many sessions, and how often a
-long break falls. One configuration is the default that new sessions start from.
-
-Each row shows all five numbers in one strip so configurations can be compared at a glance. Deleting
-a configuration explains first what uses it: history keeps its own frozen copy and stays accurate,
-and templates survive but need a new configuration before they can start.
-
-### History
-
-Every session you have run, newest first, grouped by day, with each day heading stating that day's
-completed focus time. A row shows the task, the configuration name **frozen at the time it ran**, how
-many focus intervals of how many were completed, the final status and the start time. Opening a row
-shows every interval and what happened to it.
-
-History is strictly read-only, and it never changes when a configuration is later edited or deleted.
-
-### Today and Statistics
-
-Today is a light dashboard over the current day. Statistics covers day, week, month or a custom
-range, with focus time, completed sessions, completion rate, average focus, break time, longest
-session, and a trend against the previous period. Both are read-only projections of the same history,
-computed by the same aggregator, so they can never disagree.
-
-## The macOS menu bar
-
-The menu bar item is a control surface over the one running timer, not a second timer. Clicking
-it opens a compact popover.
-
-**When nothing is running** it shows the app identity, your pinned Quick Start items, and a
-Start Timer action that opens the setup screen.
-
-**While a session runs** it shows the phase, the countdown, the paused state when paused, the
-focus progress dots, "Session X of N", the next interval and its length, and the four transport
-controls: Pause or Resume, Skip, Restart, Stop. Quick Start stays below them.
-
-**Nothing in the popover scrolls.** It is a glance-and-go surface, so the pinned list is capped at
-three rows that are always fully visible, and any further pins are offered by a compact "N more…"
-menu that starts them directly. The transport controls therefore can never be pushed off screen,
-however many items you pin, and nothing is hidden inside a scroll view.
-
-**The gear** in the top-right corner holds the secondary actions, so they never take space from
-the timer:
-
-| Item | What it does |
-|---|---|
-| Open Time Frame | Brings the existing main window forward, or creates it if you closed it |
-| Settings | Brings that same window forward on Settings |
-| History | Brings that same window forward on History |
-| Quit Time Frame | Quits the application |
 
 ### Quick Start
 
-Pin a Template or a Plan from its own page — its detail view or its list's overflow or context menu
-— and it appears in Quick Start ready to start in one click. Quick Start is offered in two places:
-the menu bar popover, and the Timer screen's header. Both read the **same** pinned projection and
-start through the **same** command seam, so there is no second Quick Start list to keep in sync.
-Pinning takes one click with no confirmation, and both surfaces reflect it immediately, with no
-restart.
+Pin the templates and plans you reach for most. They appear in the menu bar and in the Timer
+screen's header, ready to start in one click, from the same pinned list in both places.
 
-Pin state is stored on the item itself and keyed by its stable identifier, so:
+### Calendar integration
 
-- renaming a pinned item keeps the pin;
-- deleting a pinned item removes it from Quick Start;
-- editing an item never silently changes what you pinned;
-- duplicating an item copies its icon but not its pin.
+Turn a plan, or a live session, into events in Apple Calendar, so focused work sits on the same
+calendar as everything else you have committed to.
 
-An item whose configuration was deleted is still listed, with its start control disabled and the
-reason stated, so a pin is never silently discarded.
+### Session history and statistics
 
-### Icons
+Every session you run is recorded with the configuration name it ran under, frozen at the moment
+it started. Statistics re-derive from that history over a day, a week, a month, or a range you
+choose.
 
-Templates and Plans each carry an icon you choose from a curated catalog of SF Symbols, grouped
-into Focus, Study, Work, Wellbeing and General. The icon follows the item everywhere it appears:
-its list row, its detail page, its editor, and Quick Start.
+### A menu bar that is a control surface, not a second app
 
-Time Frame stores a stable identifier rather than a symbol name, and resolves it through one
-catalog, so an unrecognised stored value falls back to a sensible default instead of rendering a
-missing glyph. Icons are chosen from a native picker showing each option's glyph and name; there
-is no free-text symbol field.
+Pause, resume, skip, restart, stop, and start a pinned workflow without leaving what you are
+doing.
 
-## Open at Login
+### Native, local, and private
 
-Settings ▸ General:
+SwiftUI and SwiftData throughout. No account, no analytics, no network service. Light and Dark
+Mode, VoiceOver labels, Dynamic Type, and Reduce Motion support are part of the design system,
+not an afterthought.
 
+---
+
+## A month with Time Frame
+
+Time Frame is built for the long arc of focused work, not for a single 25-minute timer. Here is
+how the pieces come together over a working month.
+
+### Week 1 — Configure
+
+Start by describing how you actually work. A configuration holds the focus length, both break
+lengths, the number of focus sessions, and the long-break cadence, and one of them is the default
+that new sessions begin from.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/configurations.png" alt="The Configurations screen listing five saved focus structures from a fifteen-minute sprint to a ninety-minute long focus, each showing its focus, short break, long break, session count and long-break cadence" width="880">
+</div>
+
+Short Sprint for shallow work, Deep Work for the mornings, Long Focus for a day given over to one
+thing. Build the structures your week needs; the rest of the application refers to them by name.
+
+Then set up a run on the Timer screen. You name the task, choose the configuration, choose how
+many focus sessions, and see the exact interval sequence before you commit to it.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/session-setup.png" alt="The Timer screen before a session starts, showing the task field with a Recent Tasks menu, the selected configuration and its summary, the focus-session stepper, and a preview of the interval sequence" width="880">
+</div>
+
+### Week 2 — Reuse and organize
+
+By the second week the same setups keep coming back. Save them as **Templates** and stop
+rebuilding them.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/templates.png" alt="The Templates screen listing six saved focus workflows, each with an icon, the task it focuses on, the configuration it runs, and a pin marker on the ones pinned to Quick Start" width="880">
+</div>
+
+A template references its configuration rather than copying it, and starting from a template
+copies its values into the ordinary setup path — so a running session is independent of the
+template, and editing or deleting the template later never disturbs a session or your history.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/template-detail.png" alt="A template's detail page showing its icon and task, the configuration it runs with all interval lengths, one prominent Start action, Create Plan, a switch for pinning to Quick Start, and a separate Manage group" width="880">
+</div>
+
+Some work does not repeat uniformly. A release week is a long stretch of deep work, then a
+shorter pass over the release notes, then twenty minutes of review — three different rhythms in
+one sitting. That is a **Plan**: an ordered timeline where each focus interval may run on a
+different configuration.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/plan-detail.png" alt="A session plan's detail page showing seven ordered intervals with their start offsets and per-interval configurations, plus Start, Add to Calendar, and a switch for pinning to Quick Start" width="880">
+</div>
+
+From here you can add the plan's intervals to Apple Calendar, so the focused work you intend to do
+appears alongside the meetings you have already agreed to. Starting a plan freezes it into an
+immutable snapshot and runs that, so editing the plan afterwards cannot change a session that is
+already running or already recorded.
+
+### Week 3 — Focus
+
+Once the plan is ready, Time Frame gets out of the way. The screen becomes the countdown, the
+phase, where you are in the session, what comes next, and the controls — nothing else. That is the
+screen at the top of this page.
+
+The countdown is derived from real timestamps rather than counted down tick by tick, which is why
+interruptions are ordinary rather than special. Pause and the remaining time freezes exactly.
+Close the window, quit the app, sleep the Mac — the session is reconciled against the real
+timeline when you come back, down to the second.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/timer-paused.png" alt="A paused focus session after the app was relaunched, showing a Welcome back notice confirming the session was restored, the frozen remaining time, an explicit Paused label, and Resume in place of Pause" width="880">
+</div>
+
+You do not have to keep the window open to stay in control. The menu bar carries the same session
+and the same controls, plus your pinned Quick Start items.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/menu-bar.png" alt="The Time Frame menu bar popover showing the app identity, the Quick Start section with a pinned workflow ready to launch, a Start Timer action, and a gear menu in the corner for secondary actions" width="380">
+</div>
+
+Nothing in the popover scrolls: it is a glance-and-go surface, so the transport controls can never
+be pushed off screen however many items you pin. Notifications mark the transitions you asked to
+be told about, and a widget — on your desktop or in Notification Centre — shows the running
+session, today's focus, or a statistics glance, with the same controls in Timer mode.
+
+Today keeps the same information one click away inside the app: what is running now, and what the
+day has amounted to so far.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/today.png" alt="The Today screen showing the session currently in progress with its live remaining time and a Go to Timer action, above a summary of today's completed focus sessions and focus time" width="880">
+</div>
+
+### Week 4 — Review and refine
+
+Completed sessions become the record of what the month actually looked like. History lists every
+session, newest first, grouped by day, with each day heading stating that day's completed focus
+time.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/history.png" alt="The History screen listing sessions grouped by day, newest first, each day heading showing that day's completed focus time and each row showing the task, the configuration it ran under, how many focus intervals completed, and the final status" width="880">
+</div>
+
+History is strictly read-only, and each row keeps the configuration name it ran under. Rename or
+delete a configuration later and your history stays accurate.
+
+Statistics turns the same history into a picture of the month: total focus time, sessions
+completed of sessions started, completion rate, average focus per interval, the trend against the
+previous period, your most productive day, and focus by day and by configuration.
+
+<div align="center">
+  <img src="docs/assets/screenshots/macos/statistics.png" alt="The Statistics screen for the current month showing focus time, sessions, completion rate and average focus, a trend comparison against the previous month, the most productive day, and a focus-by-day chart" width="880">
+</div>
+
+Time Frame does not tell you what any of this means, and it makes no claim about what focusing
+will do for you. It tells you what happened — so you can go back to the configurations, templates
+and plans you built in weeks one and two, change the ones that did not survive contact with a real
+week, and start the next month from something better.
+
+That loop is the product: **plan, configure, focus, track, refine, repeat.**
+
+---
+
+## How it fits together
+
+```mermaid
+flowchart LR
+    Config[Pomodoro Configurations]
+    Template[Templates]
+    Plan[Plans]
+    Quick[Quick Start]
+    Focus[Focused Session]
+    Calendar[Apple Calendar]
+    History[Session History]
+    Stats[Today and Statistics]
+
+    Config --> Template
+    Config --> Plan
+    Template --> Quick
+    Plan --> Quick
+    Template --> Focus
+    Plan --> Focus
+    Config --> Focus
+    Quick --> Focus
+    Plan --> Calendar
+    Focus --> Calendar
+    Focus --> History
+    History --> Stats
+    Stats --> Config
 ```
-General
-    Open at Login                                              [ toggle ]
-    Automatically open Time Frame when you log in to your Mac.
-```
 
-Turn it on and macOS launches Time Frame when you log in. Turn it off and the login item is removed.
+Configurations describe your working rhythms. Templates and Plans build reusable workflows on top
+of them. Quick Start puts the ones you use most one click away. A focused session runs through the
+same engine whatever started it, records itself in History, and feeds the statistics you use to
+refine the next round.
 
-The toggle shows what macOS **actually** holds, not what Time Frame remembers. It is registered
-through `SMAppService`, the modern login-item API, and the switch is read back from the system on
-launch, whenever Settings appears, and after every change:
+---
 
-- if registration fails, the switch stays **off** and states why;
-- if removal fails, it stays **on**;
-- if macOS wants you to approve the item first, it reads off and offers **Open Login Items
-  Settings**, because it will not launch until you approve it.
+## Feature reference
 
-Nothing about the login item is stored in Time Frame's preferences, so the setting cannot drift out
-of step with the system. You can change it in System Settings ▸ General ▸ Login Items & Extensions
-at any time; Time Frame picks that up the next time you open Settings.
+The macOS application is a sidebar split view with eight areas.
 
-## Window management
-
-**Time Frame uses a single main application window.** Opening Time Frame from the Dock, the menu
-bar, or any other application entry point focuses the existing window instead of creating
-duplicates.
-
-| Action | What happens |
+| Area | What it is for |
 |---|---|
-| Click the Dock icon while Time Frame is running | The existing window is activated and brought to the front |
-| Click the Dock icon while the window is minimized | The window is restored from the Dock and focused — not duplicated |
-| Click the Dock icon while Time Frame is hidden | The app is unhidden and the window focused |
-| Menu bar ▸ gear ▸ Open Time Frame / Settings / History | The existing window comes forward, on that screen |
-| Repeat any of the above | Still exactly one window |
-| Close the window | The window closes; Time Frame keeps running in the menu bar, and a running session keeps running |
-| Open Time Frame again after closing it | A new main window is created |
-| Quit | ⌘Q, or the gear menu's Quit Time Frame |
+| **Today** | The current day at a glance: the session in progress, and today's completed focus sessions and focus time |
+| **Timer** | The only place a session is started from the app. Setup when idle, the countdown and controls when running |
+| **Templates** | Reusable focus setups: a name, a task, a configuration, a default session count, an icon |
+| **Plans** | Explicit ordered timelines of focus intervals and breaks, mixing configurations where you want to |
+| **Configurations** | The durations your timers run on, with one marked as the default |
+| **History** | Every session you have run, grouped by day, read-only, with frozen configuration names |
+| **Statistics** | Day, week, month or a custom range, with metrics, trends and charts |
+| **Settings** | Open at Login, default configuration, Calendar, Notifications, menu bar, iCloud status, keyboard shortcuts |
 
-Focusing the window is window behaviour only. It does not reset your sidebar selection, scroll
-position, or anything you had typed, and it never restarts, resets, or duplicates a running
-Pomodoro. Bringing the window forward uses the ordinary macOS activation, so it looks exactly like
-focusing any other window — there is no custom flash or highlight.
+### Session control
 
-There is no File ▸ New Window command, because a second window is not something the app can produce:
-the main scene is a single-instance SwiftUI `Window`, and every surface that can ask for it routes
-through one presenter. See [ADR-111](docs/DECISIONS.md) and
-[docs/41-M32-LOGIN-ITEM-AND-WINDOW-MANAGEMENT.md](docs/41-M32-LOGIN-ITEM-AND-WINDOW-MANAGEMENT.md).
+| | |
+|---|---|
+| Transport | Pause, Resume, Skip, Restart, Stop, from the app, the menu bar, a widget, a notification action, or Siri |
+| Keyboard | `⌘↩` start · `Space` pause and resume · `Esc` stop · `R` restart interval · `→` skip interval · `⌘N` new item · `⌘E` edit |
+| Recovery | A session running when the app last quit is reconciled against the real timeline on the next launch |
+| Timing | Derived from timestamps. Sleep, lock, window close and relaunch are ordinary cases |
+
+### System integration
+
+| Surface | What it does |
+|---|---|
+| **Menu bar** | The phase, countdown, paused state, focus progress, session position, next interval, and the four transport controls; Quick Start below them; secondary actions behind a gear menu. An optional live countdown in the status item. |
+| **Widget** | Small and medium, on the desktop or in Notification Centre. Configurable between a Timer, Today or Statistics view, with a chosen tap destination and interactive controls in Timer mode |
+| **Notifications** | Focus start, short break start, long break start and session completion, each independently switchable, with optional sound and action buttons |
+| **Calendar** | Add a plan's intervals to a calendar you choose, update them afterwards, and optionally reflect a live session as a single event |
+| **App Intents and Shortcuts** | Start Time Frame, Start Template, Start Plan, Pause, Resume, Skip, Stop, Check Status, Open Time Frame |
+| **Open at Login** | Registered through `SMAppService`; the switch reflects what macOS actually holds, never a stored preference |
+| **Single window** | Every entry point — Dock, menu bar, deep link — focuses the one existing window rather than opening a second |
+
+### Accessibility and appearance
+
+- VoiceOver labels and values on the countdown, phase, controls and statistics, with the countdown
+  marked as frequently updating so it does not interrupt continuously.
+- Every menu bar control names what it acts on, and a disabled control always explains itself in
+  words rather than by dimming alone.
+- Dynamic Type throughout, with the Timer screen scrolling rather than clipping at accessibility
+  sizes.
+- State is never carried by colour alone; animation respects Reduce Motion.
+- One design in both Light and Dark Mode, taking its accent from the system.
+
+This is verified from source and by automated accessibility-text tests. It has **not** been
+validated with VoiceOver on physical hardware.
+
+---
+
+## Requirements
+
+| | |
+|---|---|
+| macOS | 27.0 or later |
+| Xcode | 27.0 |
+| Swift | 6.4 toolchain, Swift 5 language mode |
+| Apple account | Any Apple ID. A paid Apple Developer membership is **not** required to build and run |
+
+Live Activities and Control Center controls are not available to native Mac applications: Apple
+ships neither ActivityKit nor `ControlWidget` for macOS. Time Frame does not claim them.
+
+---
+
+## Installation
+
+**Time Frame ships as source.** There is no downloadable, notarized build, and that is a
+consequence of not holding a paid Apple Developer membership rather than an oversight:
+
+| | Needs a paid membership |
+|---|---|
+| Developer ID certificate (signing for other machines) | Yes |
+| Notarization (no Gatekeeper warning) | Yes |
+| Mac App Store | Yes |
+| Building and running it yourself | **No** |
+
+Distributing an unsigned binary was considered and rejected. On macOS 15 and later the
+right-click-to-open bypass is gone, so every user would have to approve the app in System
+Settings, and an ad-hoc signature has no team identifier — which means the App Group is denied and
+the widget stops receiving data. Source distribution keeps the sandbox, the App Group and the
+widget intact.
+
+### Build and run
+
+1. Open `time_frame.xcodeproj` in Xcode 27.
+2. **Change the bundle identifier and App Group** — see below. Signing fails until you do.
+3. Set your team under Signing & Capabilities for the `time_frame` and `TimeFrameWidgets` targets.
+4. Choose the `time_frame` scheme and **My Mac** as the destination.
+5. Build and run.
+
+### Two identifiers you must change
+
+The identifiers in this repository are registered to the original author's team, so signing fails
+for anyone else until they are replaced with your own:
+
+| What | Current value | Where |
+|---|---|---|
+| Bundle identifier | `abirbarman.com.time-frame` | Signing & Capabilities, both targets |
+| App Group | `group.abirbarman.com.time-frame` | Two `.entitlements` files, plus `Shared/WidgetProjectionStore.swift` |
+
+The App Group string is repeated across the two entitlements files, one Swift constant, and a
+handful of test assertions that check the literal value, so changing it means a find-and-replace
+across all of them. Consolidating it into a single configurable value is outstanding work.
+
+The App Group is what the widget reads the timer projection from. If you skip it, the app still
+runs and keeps time correctly; the widget just shows no live data.
+
+### What a free Apple account gives you
+
+- **Provisioning profiles last 7 days** and are locked to the machine that built them. After that
+  the app stops launching and you rebuild.
+- **No Developer ID**, so you cannot produce a build for anyone else, and you cannot notarize.
+- **iCloud sync stays disabled** — it needs a paid team. See [iCloud](#icloud).
+
+### Command-line build
+
+```bash
+xcodebuild -project time_frame.xcodeproj -scheme time_frame -destination 'platform=macOS' build
+```
+
+To build without signing — useful for CI, and required if you have not set a team:
+
+```bash
+xcodebuild -project time_frame.xcodeproj -scheme time_frame -destination 'platform=macOS' CODE_SIGNING_ALLOWED=NO build
+```
+
+That also **strips entitlements**, which disables the sandbox and the App Group. Use it for
+continuous integration and tests, not for daily use. Run `xcodebuild` invocations serially;
+concurrent runs contend on the shared DerivedData build database.
+
+### Developing against a scratch store
+
+The application declares the App Sandbox, so a **signed** build keeps its data in its own
+container. A build made with `CODE_SIGNING_ALLOWED=NO` has its entitlements stripped, is therefore
+**not** sandboxed, and falls back to the shared unsandboxed path — the same store an installed
+copy would use. Redirect any build with an environment variable on the scheme's Run action:
+
+```bash
+TIMEFRAME_STORE_DIRECTORY=/tmp/timeframe-dev
+```
+
+Do this before running an unsigned build against a library you care about. The test suite always
+uses an isolated store under the temporary directory, enforced by a test that checks the live
+environment. Note that the bundle identifier is deliberately unchanged, so a development build
+still shares `UserDefaults` — settings and permissions — with an installed copy; only the store is
+isolated.
+
+---
+
+## Testing
+
+```bash
+xcodebuild -project time_frame.xcodeproj -scheme time_frame -destination 'platform=macOS' test
+```
+
+Measured on 2026-09-09, on macOS 27 with Xcode 27:
+
+| | Result |
+|---|---|
+| Test suite | **1020 tests in 218 suites, all passing** |
+| Debug build | Succeeds, 0 compiler warnings |
+| Release build | Succeeds, 0 compiler warnings |
+
+There is no continuous integration; these numbers were measured locally.
+
+Tests fall into four kinds:
+
+- **Deterministic domain tests** driven by an injected mock clock. The timer suite never waits a
+  real second.
+- **Persistence and integration tests** over in-memory and on-disk stores, including an executed
+  V6 → V7 migration against a store written by the previous schema rather than an assumed one.
+- **Isolation tests** proving that a failing Calendar, notification or widget integration cannot
+  stop or corrupt a session.
+- **Source-boundary audits** that scan the tree and fail the build if an architectural invariant
+  regresses — a second timer engine, a second scheduling primitive, SwiftData inside the widget
+  extension, a CloudKit import, or an unannounced schema change.
+
+---
 
 ## Architecture
 
@@ -289,8 +435,8 @@ through one presenter. See [ADR-111](docs/DECISIONS.md) and
                           |
                           v
         Coordinators and integration adapters
-      (menu bar, calendar, notifications, widgets,
-              Live Activity, App Intents)
+        (menu bar, calendar, notifications,
+             widget, App Intents, window)
                           |
                           v
                   SessionCoordinator          <-- the one control seam
@@ -302,527 +448,305 @@ through one presenter. See [ADR-111](docs/DECISIONS.md) and
               SwiftData repositories
 ```
 
-Dependencies point downward only. `TimerEngine` imports neither SwiftUI nor SwiftData, and reads time
-through an injected clock, which makes the whole timing model deterministically testable.
+Dependencies point downward only. `TimerEngine` imports neither SwiftUI nor SwiftData and reads
+time through an injected clock, which makes the whole timing model deterministically testable.
 
-Four invariants hold the design together, and each is enforced by an automated source audit that fails
-the build if it regresses:
+Four invariants hold the design together, and each is enforced by an automated source audit that
+fails the build if it regresses:
 
-- **One `TimerEngine` and one `SessionCoordinator`** per running app.
-- **Timestamp-authoritative timing.** A running interval is anchored to a target end date; remaining
-  time is always `targetEnd - now`. Nothing decrements a counter.
+- **One `TimerEngine` and one `SessionCoordinator`** per running application.
+- **Timestamp-authoritative timing.** A running interval is anchored to a target end date;
+  remaining time is always `targetEnd - now`. Nothing decrements a counter.
 - **One mutation seam.** Every command, from every surface, converges on `SessionCoordinator`.
-- **Nothing unbounded on the control path.** Lifecycle events are emitted synchronously, so observers
-  may only do work derived from in-memory anchors; anything that reads the store is deferred and
-  coalesced.
-
-See the [Developer Overview](docs/36-DEVELOPER-OVERVIEW.md) and
-[Architecture](docs/01-ARCHITECTURE.md).
+- **Nothing unbounded on the control path.** Lifecycle events are emitted synchronously, so
+  observers may only do work derived from in-memory anchors; anything that reads the store is
+  deferred and coalesced.
 
 ### Widget architecture
 
-Widget extensions run in a separate process and cannot read the application's database. The bridge is
-a single small `Codable` value:
+The widget extension runs in a separate process and cannot read the application's database. The
+bridge is a single small `Codable` value:
 
 ```text
 SessionCoordinator -- lifecycle event --> WidgetProjectionWriter
                                                  |
-                                     WidgetProjection in an App Group
+                                      WidgetProjection in an App Group
                                                  |
-                     +---------------------------+---------------------------+
-                     |                           |                           |
-              Home Screen widget       Lock Screen accessory        Control Center
+                                          Widget extension
 ```
 
-The App Group is `group.abirbarman.com.time-frame`. The projection carries the interval's frozen start
-and end anchors, so every surface renders its countdown with `Text(timerInterval:)` between those
-anchors — a repaint, not a clock. The projection is written only on meaningful transitions, never per
-tick.
+The projection carries the interval's frozen start and end anchors, so the widget renders its
+countdown with `Text(timerInterval:)` between those anchors — a repaint, not a clock. It is
+written only on meaningful transitions, never per tick.
 
 ### Command seam
 
 ```text
-Widget button / Control Center / App Shortcut / notification action
-                              |
-                     WidgetControlActions
-                              |
-                   AppIntentSessionActions
-                              |
-                     SessionCoordinator --> TimerEngine
+Widget button / App Shortcut / notification action
+                     |
+            WidgetControlActions
+                     |
+          AppIntentSessionActions
+                     |
+            SessionCoordinator --> TimerEngine
 ```
 
 WidgetKit runs a widget-button intent in the application's own process, where the router is
 registered. Failures surface as a closed error set, never a leaked framework error.
 
-### Notifications
-
-The notification stack is shared by macOS and iOS and isolated behind a protocol, with
-`UserNotificationService` as the only file importing UserNotifications. Notifications are scheduled
-from the engine's frozen interval-end anchors — one per boundary, never on a tick — with deterministic
-identifiers so reconciliation is idempotent. Every failure is caught: a notification problem can never
-stop or corrupt a session.
-
 ### Persistence
 
-SwiftData with a versioned schema, currently **V7**, and a migration plan. Repositories are the only
-types that touch a `ModelContext`.
+SwiftData with a versioned schema, currently **V7**, and a migration plan. Repositories are the
+only types that touch a `ModelContext`. Historical identity is frozen: a session copies the values
+it needs when it starts, including the configuration's name, so renaming or deleting a
+configuration never rewrites history.
 
-V7 adds the Quick Start icon and pin attributes to `TaskTemplate` and `SessionPlan`. The model set
-is unchanged — the same six types since V5 — and every added attribute is defaulted or optional, so
-an existing store opens in place.
-
-Historical identity is frozen: a session copies the values it needs when it starts, including the
-configuration's name, so renaming or deleting a configuration never rewrites history.
-
-`PersistenceController` degrades safely to the preserved local store if a cloud store cannot be
-opened — never to an empty in-memory store, and never in a way that blocks the timer.
-
-### CloudKit
-
-> **iCloud synchronization is disabled.** This project is developed with a personal (free) Apple
-> Developer team, which cannot provision the iCloud capability. The iCloud entitlement is deliberately
-> absent, no CloudKit container is used, and `CloudKitCapability.entitledInThisBuild` is `false`, so
-> both applications launch local-first. A test fails the build if the entitlement and that constant
-> ever disagree.
->
-> Cross-device synchronization has **never been enabled or verified**. The application does not claim
-> working CloudKit sync.
-
-No file in the codebase imports CloudKit. Sync, when it is eventually enabled, is SwiftData's native
-mirroring beneath the repositories.
+**A store that cannot be opened is preserved, never deleted.** If the store cannot be opened — an
+unrecognised schema, a damaged file, a permissions problem, a lock held by another copy — Time
+Frame leaves every byte where it is, shows a recovery screen instead of an empty library, and
+waits for you to choose: try again, reveal the store in Finder, or move it into a dated
+`TimeFrame Recovery` folder and start fresh. There is no `FileManager.removeItem` anywhere in
+production source.
 
 ### Design system
 
-Presentation lives in one place, not per screen. `Core/Support/DesignSystem/` defines the spacing and
-radius scales, the type scale (`TFTypography`), the control-size rule (`TFControl`, with the
-`tfPrimaryAction` / `tfSecondaryAction` treatments), the semantic palette, the Reduce-Motion-aware
-animation vocabulary, the Liquid Glass surfaces, and the one content card (`tfCard`) every grouped
-surface in the app uses.
-`time_frame/Views/Components/` builds the shared macOS pieces on top of it: the page and section
-headers, the details card, the icon tile, a list row's trailing controls, the Manage group, the
-notice banner, and the editor-sheet header.
-
-The design system imports none of the domain, and no file under `Core/Timer/`, `Core/Models/` or
-`Core/Services/` changes for a visual reason. Glass is used selectively, for the primary action and
-floating control regions; ordinary content sits on the quiet card. Colour is always paired with a
-label or icon, and every screen is one design in both Light and Dark Mode rather than two.
+`Core/Support/DesignSystem/` owns the spacing and radius scales, the type scale, the control-size
+rule, the semantic palette, the Reduce-Motion-aware animation vocabulary, the Liquid Glass
+surfaces, and the one content card every grouped surface uses.
+`time_frame/Views/Components/` builds the shared macOS pieces on top of it. The design system
+imports none of the domain, and no file under `Core/Timer/`, `Core/Models/` or `Core/Services/`
+changes for a visual reason.
 
 Each page has exactly one prominent action, sized to its content at the native macOS control
 height — never a full-width filled slab. Supporting actions are bordered and match that height,
-preferences are switches, and destructive actions live in their own quieter group. The single
-deliberate exception is the menu-bar popover's fallback action, whose container genuinely is the
-width of the control.
+preferences are switches, and destructive actions live in their own quieter group.
 
-### Calendar integration
+### Calendar
 
-macOS only, and entirely optional. `EventKitCalendarService` is the only file in the codebase that
-imports EventKit; `TimerEngine` and the domain import none of it. A `CalendarCoordinator` subscribes
-to the same pure `SessionLifecycleEvent` seam that notifications and the widget projection use, so
-the three integrations are independent and none can influence another.
+`EventKitCalendarService` is the only file in the codebase that imports EventKit; `TimerEngine`
+and the domain import none of it. A `CalendarCoordinator` subscribes to the same pure
+`SessionLifecycleEvent` seam that notifications and the widget projection use, so the three
+integrations are independent and none can influence another. Calendar work is deferred off the
+timer's control path, and a Calendar failure can never stop, delay or corrupt a running timer —
+an isolation property covered by its own tests.
 
-From a Plan's detail page you can add its intervals to Apple Calendar, and update them afterwards.
-Calendar settings and the mapping from a plan to the event it created are stored in `UserDefaults`,
-not in the SwiftData store. A Calendar failure is surfaced quietly and can never stop, delay or
-corrupt a running timer — an isolation property covered by its own tests.
+### Notifications
 
-### Accessibility
+Isolated behind a protocol, with `UserNotificationService` as the only file importing
+UserNotifications. Notifications are scheduled from the engine's frozen interval-end anchors — one
+per boundary, never on a tick — with deterministic identifiers so reconciliation is idempotent.
+Every failure is caught.
 
-VoiceOver labels and values on the countdown, phase, controls and statistics; the countdown is marked
-as frequently updating so it does not interrupt continuously. Every menu bar control names what it
-acts on ("Skip Interval", "Start Deep Work", "Pin Deep Work to Quick Start", "Settings and More"),
-each Quick Start row is a single focus stop, and a disabled control always explains itself in
-words. Dynamic Type throughout, with the timer
-screen scrolling rather than clipping at accessibility sizes. State is never carried by colour alone.
-Animations respect Reduce Motion.
+### iCloud
 
-This is verified from source and by automated accessibility-text tests. It has **not** been validated
-with VoiceOver on physical hardware.
+> **iCloud synchronization is disabled.** This project is developed with a personal (free) Apple
+> Developer team, which cannot provision the iCloud capability. The iCloud entitlement is
+> deliberately absent, no CloudKit container is used, and `CloudKitCapability.entitledInThisBuild`
+> is `false`, so the application launches local-first. A test fails the build if the entitlement
+> and that constant ever disagree.
+>
+> Cross-device synchronization has **never been enabled or verified**, and Time Frame does not
+> claim working sync.
 
-## Requirements
+No file in the codebase imports CloudKit. Sync, when it is eventually enabled, is SwiftData's
+native mirroring beneath the repositories.
 
-| | |
-|---|---|
-| Xcode | 27.0 |
-| Swift | 6.4 toolchain, Swift 5 language mode |
-| macOS deployment target | 27.0 |
-| Apple account | Any Apple ID. A paid membership is **not** required to build and run; see the limits under [Installation](#installation-and-development-setup) |
+---
 
-## Distribution
+## Privacy
 
-Time Frame ships as **source only**. There is no downloadable app, and that is a deliberate
-consequence of not holding a paid Apple Developer membership rather than an oversight:
+Time Frame stores your configurations, templates, plans and session history locally on your Mac.
+There is no account, no analytics, no tracking, and no network service your data is sent to. The
+application works entirely offline.
 
-| | Needs paid membership |
-|---|---|
-| Developer ID certificate (signing for other machines) | Yes |
-| Notarization (no Gatekeeper warning) | Yes |
-| Mac App Store | Yes |
-| Building and running it yourself | **No** |
+The widget reads a small shared summary — current phase, interval anchors, today's totals — from
+an App Group container. Notifications are scheduled locally through the system notification
+service. Calendar events are written only to a calendar you choose, and only when you turn the
+integration on.
 
-Distributing an unsigned binary was considered and rejected. On macOS 15 and later the
-right-click-to-open bypass is gone, so every user would have to approve the app in System Settings,
-and an ad-hoc signature has no team identifier — which means the App Group is denied and every
-widget surface stops receiving data. Source distribution keeps the sandbox, the App Group and the
-widgets intact.
+Documented here only where it has been verified:
 
-## Installation and development setup
+- The application makes no network requests and has no server component.
+- No credentials, tokens, API keys or signing material are committed to this repository; an
+  automated audit checks for committed secrets.
+- No iCloud entitlement is declared, and no CloudKit container is contacted.
+- The application declares the App Sandbox, so a signed build keeps its data in its own container,
+  protected by the operating system's standard file protection. Time Frame does **not** add its own
+  encryption layer, and no claim of application-level encryption is made.
 
-Time Frame is distributed as source. There is no signed, notarized download: that requires a
-Developer ID certificate, which is only available with a paid Apple Developer membership. Building
-it yourself takes a few minutes and produces an app signed for your own machine.
+See the [privacy nutrition labels](docs/appstore/PRIVACY-NUTRITION-LABELS.md) for the App Store
+declaration.
 
-### Build and run
+---
 
-1. Open `time_frame.xcodeproj` in Xcode 27.
-2. **Change the bundle identifier and App Group** — see below. Signing fails until you do.
-3. Select your team under Signing and Capabilities for the `time_frame` and `TimeFrameWidgets`
-   targets.
-4. Choose the `time_frame` scheme and My Mac as the destination.
-5. Build and run.
+## Project status
 
-### You must change two identifiers
+**This repository contains the macOS application.** It is the released product.
 
-The identifiers in this repository are registered to the original author's team, so signing will
-fail for anyone else until they are replaced with your own:
+An iPhone and iPad companion exists as separate native targets built from the same platform-neutral
+core, but it is **not part of this repository and is not a released product**. Nothing in this
+README describes it.
 
-| What | Current value | Where |
-|---|---|---|
-| Bundle identifier | `abirbarman.com.time-frame` | Signing and Capabilities, all four targets |
-| App Group | `group.abirbarman.com.time-frame` | two `.entitlements` files, plus `Shared/WidgetProjectionStore.swift` |
+### Known limitations
 
-The App Group string is repeated across the two entitlements files, one Swift constant and a
-handful of test assertions that check the literal value. Changing it means a
-find-and-replace across all of them. Consolidating this into a single configurable value is
-outstanding work.
+- iCloud sync is disabled, and cross-device sync has never been verified. It requires a paid Apple
+  Developer team.
+- Live Activities and Control Center controls are unavailable on macOS by platform constraint.
+- VoiceOver has been validated from source and by automated accessibility-text tests, not with the
+  screen reader on physical hardware.
+- The menu bar popover while a session is running, the Plan and Configuration editors, and the
+  History detail page are documented in prose but not yet photographed. See the
+  [screenshot inventory](docs/assets/screenshots/macos/README.md).
+- There is no continuous integration; the suites are run locally.
 
-The App Group is what the widgets, Lock Screen widgets and Control Center controls read the timer
-projection from. If you skip it, the app still runs and keeps time correctly; those surfaces just
-show no live data.
+### Deferred work
 
-### What a free Apple account gives you
+- Enable and verify CloudKit synchronization once a paid Apple Developer team is available.
+- Consolidate the App Group identifier into a single configurable value.
+- Project template and plan icons into the widget, which currently shows the running session and
+  has no icon of its own.
 
-A free (personal) Apple ID can sign and run the app, with limits worth knowing before you start:
-
-- **Provisioning profiles last 7 days** and are locked to the machine that built them. After that
-  the app stops launching and you rebuild. This applies to macOS as well as iOS.
-- **No Developer ID**, so you cannot produce a build for anyone else, and you cannot notarize.
-- **CloudKit sync stays disabled** — it needs a paid team. The app is local-first by design and
-  `CloudKitCapability.entitledInThisBuild` is `false`; see [ADR-080](docs/DECISIONS.md).
-- **App Groups on iOS are not confirmed to be available** on a personal team. They work on macOS —
-  verified. On iOS this is untested; if the capability is unavailable, the iOS widgets, Live
-  Activity and Control Center controls will not receive data.
-
-### Signing off entirely
-
-For command-line builds and tests you can skip signing:
-
-```bash
-xcodebuild -project time_frame/time_frame.xcodeproj -scheme time_frame \
-  -destination 'platform=macOS' CODE_SIGNING_ALLOWED=NO build
-```
-
-This also **strips entitlements**, which disables the sandbox and the App Group. The app then falls
-back to an unsandboxed store path shared with any other app that does the same — see
-[Data Safety and Recovery](#data-safety-and-recovery). Use it for CI and tests, not for daily use.
-
-### Build instructions (command line)
-
-```bash
-xcodebuild -project time_frame/time_frame.xcodeproj -scheme time_frame \
-  -destination 'platform=macOS' build
-```
-
-
-Run `xcodebuild` invocations serially; concurrent runs contend on the shared DerivedData build
-database.
-
-## Testing
-
-```bash
-xcodebuild -project time_frame/time_frame.xcodeproj -scheme time_frame \
-  -destination 'platform=macOS' test
-```
-
-
-Measured on 2026-09-07:
-
-| Suite | Result |
-|---|---|
-| macOS | 949 tests in 200 suites, all passing |
-| macOS Debug build | Succeeds, 0 compiler warnings |
-| macOS Release build | Succeeds, 0 compiler warnings |
-
-Tests fall into four kinds: deterministic domain tests driven by a mock clock, persistence and
-integration tests over in-memory stores, isolation tests proving a failing integration cannot corrupt
-a session, and **source-boundary audits** that scan the tree and fail the build if an architectural
-invariant regresses — a second engine, a second scheduling primitive, SwiftData inside a widget
-extension, ActivityKit outside iOS, a CloudKit import, or a schema-version change.
-
-The domain suite never waits a real second; the engine is driven through an injected clock.
+---
 
 ## Repository layout
 
-The repository root holds the Xcode project, the source, `README.md`, `LICENSE`, `CLAUDE.md` and
-`docs/`. There is no nesting: what you clone is what Xcode opens.
-
-## Project structure
-
 ```text
-Core/                    Platform-neutral domain, compiled into both apps
+Core/                    Platform-neutral domain
   Models/                SwiftData models
   Timer/                 TimerEngine, SessionCoordinator, plan value types
   Statistics/            Pure aggregation
-  Services/              Persistence, notifications, cloud, Quick Start, Live Activity core
+  Services/              Persistence, notifications, cloud, Quick Start
   Support/               Pure helpers, the icon catalog, the design system
   Intents/               App Intents and the command seam
   Widgets/               App-side projection writer and mapper
-Shared/                  Foundation-only value types shared with extensions
+Shared/                  Foundation-only value types shared with the extension
 time_frame/              macOS application
-  Services/Window/       The single-window policy, presenter, AppKit host, app delegate
+  Services/Window/       The single-window policy, presenter and AppKit host
   Services/Login/        Open at Login, isolated behind SMAppService
+  Services/Calendar/     The Calendar integration, isolated behind EventKit
   Services/MenuBar/      The menu bar adapter
-  Views/                 The screens, the menu bar popover, and the shared components
+  Views/                 The screens, the menu bar popover, shared components
 TimeFrameWidgets/        macOS widget extension
-time_frameTests/         macOS test bundle
+time_frameTests/         Test bundle
 docs/                    Documentation
 ```
+
+The Xcode project uses file-system-synchronized groups: any `.swift` file placed under
+`time_frame/`, `TimeFrameWidgets/` or `Core/` is compiled automatically into its owning target.
+`Shared/` files are compiled into both targets through explicit build membership.
+
+---
 
 ## Documentation
 
 | Document | For |
 |---|---|
 | [Documentation index](docs/README.md) | Everything, organised |
-| [macOS User Guide](docs/35-MACOS-USER-GUIDE.md) | Using Time Frame on the Mac: every screen, which feature to use when, shortcuts, troubleshooting, FAQ |
-| [macOS User Guide](docs/35-MACOS-USER-GUIDE.md) | Every screen of the macOS app, in order |
+| [macOS User Guide](docs/35-MACOS-USER-GUIDE.md) | Every screen and setting, which feature to use when, shortcuts, troubleshooting, FAQ |
 | [Developer Overview](docs/36-DEVELOPER-OVERVIEW.md) | Orientation, concurrency model, invariants |
 | [Architecture](docs/01-ARCHITECTURE.md) | The full architecture |
 | [Data Model](docs/02-DATA-MODEL.md) | SwiftData models and schema V7 |
 | [Timer Engine](docs/03-TIMER-ENGINE.md) | The state machine specification |
-| [Testing Plan](docs/10-TESTING-PLAN.md) | Test strategy |
-| [WidgetKit](docs/20-WIDGETKIT.md) | Widget projection and App Group |
-| [Control Center](docs/31-CONTROL-CENTER-CONTROLS.md) | Control architecture |
-| [iCloud and CloudKit](docs/22-ICLOUD-CLOUDKIT.md) | Sync transport and its current status |
-| [Stability and Reliability](docs/34-M26-STABILITY-AND-RELIABILITY.md) | The freeze investigation and its concurrency rules |
+| [Session Planner](docs/14-SESSION-PLANNER.md) | Plans, snapshots and execution |
+| [Calendar Integration](docs/15-CALENDAR-INTEGRATION.md) | The EventKit isolation and event model |
+| [Notifications](docs/16-NOTIFICATIONS.md) | Scheduling from frozen anchors |
 | [Menu Bar, Quick Start and Icons](docs/37-M28-MENU-BAR-QUICK-START-ICONS.md) | The popover hierarchy, pinning, and the icon catalog |
-| [macOS Interface Redesign](docs/38-M29-MACOS-UI-REDESIGN.md) | The design system, the screen-by-screen redesign, and the editor presentation fix |
-| [Design System Consolidation](docs/39-M30-DESIGN-SYSTEM-CONSOLIDATION.md) | The type scale, the control-size rule, and the compact primary action |
-| [Data Safety and Recovery](docs/40-M31-DATA-SAFETY-AND-RECOVERY.md) | Why a store that cannot be opened is preserved, how recovery works, and store isolation for development |
-| [Product Name and Icon](docs/42-M33-PRODUCT-NAME-AND-ICON.md) | The user-facing name, which identifiers stay internal, and how the app icon is configured |
-| [Open at Login and Window Management](docs/41-M32-LOGIN-ITEM-AND-WINDOW-MANAGEMENT.md) | The single-window architecture, Dock reopen, and the login item |
+| [Statistics](docs/19-STATISTICS.md) | The read-only aggregation layer |
+| [WidgetKit](docs/20-WIDGETKIT.md) | Widget projection and App Group |
+| [Data Safety and Recovery](docs/40-M31-DATA-SAFETY-AND-RECOVERY.md) | Why an unopenable store is preserved, and how recovery works |
+| [Stability and Reliability](docs/34-M26-STABILITY-AND-RELIABILITY.md) | The freeze investigation and its concurrency rules |
 | [Decisions](docs/DECISIONS.md) | Every architectural decision record |
 | [Changelog](docs/CHANGELOG.md) | What changed, milestone by milestone |
+| [Screenshot inventory](docs/assets/screenshots/macos/README.md) | What was captured, in what environment, with what data |
 
-## Architecture decisions
-
-Every structural decision is recorded as a numbered ADR in [`docs/DECISIONS.md`](docs/DECISIONS.md),
-with the context that forced it and the consequences it accepted. The ones that constrain day-to-day
-work most:
+Every structural decision is recorded as a numbered ADR in
+[`docs/DECISIONS.md`](docs/DECISIONS.md), with the context that forced it and the consequences it
+accepted. The ones that constrain day-to-day work most:
 
 | ADR | Decision |
 |---|---|
 | ADR-045 / ADR-049 | The menu bar is a presentation and control surface over the one coordinator, never a second timer |
 | ADR-055 | Widget surfaces are a read-only projection written to an App Group; the extension imports no SwiftData |
 | ADR-056 | Every App Intent acts only through the one `AppIntentSessionActions` seam |
-| ADR-063 | Timer execution is device-local; a session synced from another device is never resumed here |
-| ADR-069 | Widget and Control Center buttons route through that same single mutation seam |
 | ADR-099 / ADR-100 | Nothing on the timer control path may do unbounded or persistence-heavy work |
 | ADR-101 | A `MenuBarExtra` label must never contain a `TimelineView` |
 | ADR-103 | Icons are a closed catalog; the persisted value is a stable identifier, never a symbol name |
 | ADR-104 | Pin state lives on the pinned item, keyed by its identifier |
-| ADR-106 | A pushed detail page presents its own editor sheet |
 | ADR-107 | The menu bar popover does not scroll |
-| ADR-111 | There is one main window and one pathway to it; a Dock reopen focuses it rather than duplicating it |
-| ADR-112 | The login item is registered with `SMAppService`, and the system — never a stored preference — is the source of truth |
+| ADR-109 | A store that cannot be opened is preserved, never deleted |
+| ADR-111 | There is one main window and one pathway to it |
+| ADR-112 | The login item is registered with `SMAppService`, and the system is the source of truth |
 
-Many of these are enforced mechanically. The `ProductionReadiness*` suites scan the source tree and
-fail the build if an invariant regresses.
+---
 
 ## Troubleshooting
 
-**A build fails with a code-signing error.** The project uses manual signing for
-`abirbarman.com.time-frame`. Set your own team in Signing and Capabilities, or add
+**A build fails with a code-signing error.** Set your own team in Signing & Capabilities, or add
 `CODE_SIGNING_ALLOWED=NO` to a command-line build.
 
-**Widgets, Control Center or the Live Activity show placeholder data.** An unsigned build carries no
-entitlements, so the App Group container the widget reads is unavailable. Build with your own signing
-team.
+**The widget shows placeholder data.** An unsigned build carries no entitlements, so the App Group
+container the widget reads is unavailable. Build with your own signing team.
+
+**The menu bar item is missing.** Settings has a **Show in Menu Bar** preference. Toggling it never
+affects a running session.
+
+**A template or plan says it needs a configuration.** Its configuration was deleted. Open the item,
+choose a configuration, and save — the item itself was never lost.
+
+**A session was running when the app last quit.** On the next launch Time Frame reconciles it
+against the real timeline: intervals whose planned end has passed are completed, and the session
+either resumes or is recorded as interrupted.
+
+**Clicking the Dock icon does not bring the window back.** If Time Frame is running with no window,
+a Dock click creates it. If the window is minimized or the app is hidden, the same click restores
+and focuses the existing one. Either way you get exactly one window.
+
+**Time Frame quit when I closed the window.** It should not: closing the window leaves the app
+running in the menu bar, and a running session keeps running. If Time Frame is not in your menu
+bar, check Settings ▸ Menu Bar — with the menu bar hidden and the window closed, the Dock icon is
+the only way back.
+
+**Open at Login is off even though I turned it on.** The switch reflects what macOS actually holds,
+not what you asked for. Either the registration was refused — the reason is shown under the toggle
+— or macOS is waiting for you to approve the item, in which case Time Frame offers **Open Login
+Items Settings**.
+
+**History or Statistics look wrong after editing a configuration.** They should not change. Each
+session freezes its own plan and configuration name when it starts.
 
 **Two `xcodebuild` runs interfere with each other.** Run them serially; concurrent runs contend on
 the shared DerivedData build database.
 
-**The menu bar item is missing.** Settings has a "Show in Menu Bar" preference. Toggling it never
-affects a running session.
-
-**A template or plan says it needs a configuration.** Its configuration was deleted. Open it, choose
-a configuration, and save — the item itself was never lost.
-
-**A session was running when the app last quit.** On the next launch Time Frame reconciles it against
-the real timeline: intervals whose planned end has passed are completed, and the session either
-resumes or is recorded as interrupted. Recovery is device-local, so a session running on another
-device is never taken over here.
-
-**Clicking the Dock icon does not bring the window back.** If Time Frame is running with no window
-— you closed it, and the menu bar kept the app alive — a Dock click creates the window again. If the
-window is minimized or Time Frame is hidden, the same click restores and focuses the existing one.
-Either way you get exactly one window; the app cannot open a second.
-
-**Time Frame quit when I closed the window.** It should not: closing the window leaves the app
-running in the menu bar, and a running session keeps running. If Time Frame is not in your menu bar,
-check Settings ▸ Menu Bar ▸ Show in Menu Bar — with the menu bar hidden and the window closed, the
-Dock icon is the only way back.
-
-**Open at Login is off even though I turned it on.** The switch reflects what macOS actually holds,
-not what you asked for. Two common causes: the registration was refused (the reason is shown under
-the toggle), or macOS is waiting for you to approve the item — in which case Time Frame offers
-**Open Login Items Settings**, and the item will not launch until you allow it there.
-
-**History or Statistics look wrong after editing a configuration.** They should not change. Each
-session freezes its own plan and configuration name when it starts, so editing or deleting a
-configuration never rewrites what has already been recorded.
-
-## Data Safety and Recovery
-
-Time Frame keeps its data in a SwiftData store at `~/Library/Application Support/default.store`,
-alongside its `-wal` and `-shm` sidecar files.
-
-**The app never deletes that store because it could not open it.** If the store cannot be opened —
-a schema it does not understand, a damaged file, a permissions problem, a lock held by another
-copy — Time Frame does not replace it with an empty one. It leaves every byte where it is, shows a
-recovery screen instead of the library, and waits for you to choose:
-
-- **Try Again** re-attempts the open and changes nothing either way. For a store locked by another
-  running copy, this is usually the whole fix.
-- **Show in Finder** reveals the store so you can copy it somewhere safe first.
-- **Continue Without Existing Data** moves the existing store — with both sidecars — into a dated
-  folder named `TimeFrame Recovery` beside it, then starts with an empty library. It asks for
-  confirmation first, it never overwrites an earlier recovery copy, and if the move cannot be
-  performed the app stays in recovery rather than proceeding.
-
-This matters because the alternative is invisible: an app that quietly rebuilds a store looks
-exactly like a fresh install, so the loss is not noticed until you go looking for something that
-is no longer there. See [ADR-109](docs/DECISIONS.md) and
-[Data Safety and Recovery](docs/40-M31-DATA-SAFETY-AND-RECOVERY.md).
-
-### Migrations
-
-Schema upgrades are additive and are tested against a real store written by the previous schema
-version, not assumed. The V6 → V7 upgrade is covered by `PersistenceMigrationV6ToV7Tests`, which
-writes a realistic V6 library and verifies that identities, values, timestamps, relationships and
-session history all survive.
-
-### Development store isolation
-
-A locally built copy of a non-sandboxed macOS app resolves to the same store as an installed copy.
-To avoid a development build touching real data:
-
-- the test suite always uses an isolated store under the temporary directory — enforced by a test
-  that checks the *live* environment;
-- any build can be redirected with an environment variable on the scheme's Run action:
-
-```bash
-TIMEFRAME_STORE_DIRECTORY=/tmp/timeframe-dev
-```
-
-Note that the bundle identifier is deliberately unchanged, so a development build still shares
-`UserDefaults` — settings and permissions — with an installed copy. Only the SwiftData store is
-isolated.
-
-## Privacy
-
-Time Frame stores your configurations, templates, plans and session history locally on your device.
-There is no account, no analytics, no tracking, and no network service that your data is sent to. The
-application works entirely offline.
-
-Widgets and Control Center read a small shared summary — current phase, interval anchors, today's
-totals — from an App Group container. Notifications are scheduled locally through the system
-notification service.
-
-See [Data and privacy](docs/35-USER-GUIDE.md#17-data-and-privacy) and the
-[privacy nutrition labels](docs/appstore/PRIVACY-NUTRITION-LABELS.md).
-
-## Security
-
-Documented here only where it has been verified:
-
-- The application makes no network requests and has no server component.
-- No credentials, tokens, API keys or signing material are committed to the repository; an automated
-  audit checks for committed secrets.
-- No iCloud entitlement is declared, and no CloudKit container is contacted.
-- Data is stored in the application's own container, protected by the operating system's standard
-  file protection. Time Frame does **not** add its own encryption layer, and no claim of
-  application-level encryption is made.
-
-## Known limitations
-
-- iCloud sync is disabled, and cross-device sync has never been verified. It requires a paid Apple
-  Developer team.
-- Configurations, task templates and session plans can only be created and edited on macOS.
-- Live Activities and Control Center controls are unavailable on macOS by platform constraint.
-- Physical-device behaviour is unverified: notification banners, StandBy, the Dynamic Island, and
-  VoiceOver have been validated only from source, tests and simulators.
-- macOS screenshots cover eight screens; Plans, Configurations, History, Statistics, Today and
-  Settings are documented in prose but not yet photographed. See the
-  [macOS screenshot inventory](docs/assets/screenshots/macos/README.md).
-- Pinning to Quick Start, and the icon picker, are macOS-only. A pinned item's icon is stored in the
-  shared model, so it is visible wherever iOS shows the item.
-- There is no continuous integration. The test numbers above were measured locally.
-
-## Roadmap
-
-Only work that is already documented as deferred is listed here.
-
-- Enable and verify CloudKit synchronization once a paid Apple Developer team is available, including
-  two-device sync and production schema deployment.
-- Physical-device validation of Live Activities, the Dynamic Island, StandBy, Control Center,
-  notification delivery and VoiceOver.
-- Configuration management on iPhone and iPad.
-- A Quick Start surface on iPhone and iPad. The pin and icon data are platform-neutral, so an iOS
-  surface can reuse them unchanged.
-- Template and plan icons in widget surfaces. Widgets currently project the running session, which
-  has no icon of its own.
+---
 
 ## Contributing
 
-This is a personal project and there is no formal contribution process, issue tracker, or public
-repository. If you are working in this codebase, read
-[`CLAUDE.md`](CLAUDE.md) for the operating rules and
+This is a personal project with no formal contribution process or issue tracker. If you are working
+in this codebase, read [`CLAUDE.md`](CLAUDE.md) for the operating rules and
 [`docs/DECISIONS.md`](docs/DECISIONS.md) before changing anything structural.
+
+---
 
 ## License
 
 Time Frame is released under the **MIT License**. See [LICENSE](LICENSE) for the full text.
 
-In practice: you may use, copy, modify, merge, publish, distribute, sublicense and sell this
-software, for any purpose including commercial, free of charge. There is one condition.
-
-### The one condition — attribution
+You may use, copy, modify, merge, publish, distribute, sublicense and sell this software, for any
+purpose including commercial, free of charge. There is one condition:
 
 > The above copyright notice and this permission notice shall be included in all copies or
 > substantial portions of the Software.
 
-Keep the copyright line and the licence text with the code. Concretely:
-
-- **Using the source, forking, or building on it** — keep the `LICENSE` file in your copy. That is
-  the whole obligation.
-- **Shipping an app built from this code** — include the MIT notice somewhere a user can reach it,
-  such as an acknowledgements or about screen.
-- **Quoting substantial portions in another project** — carry the notice into that project's
-  licence file or third-party notices.
-
-A link back is appreciated but is not required by the licence.
+In practice: keep the `LICENSE` file in your copy; if you ship an application built from this
+code, include the MIT notice somewhere a user can reach it, such as an acknowledgements screen.
 
 The software is provided as is, without warranty. That clause is not decoration: this is a personal
 project that has never been notarized or distributed as a binary, and it manages data you may care
-about. Read [Data Safety and Recovery](#data-safety-and-recovery) before trusting it with a long
-history.
+about.
 
 ### What the licence does not cover
 
-MIT licenses the **code**. It does not grant rights to the product name or the mark:
-
-- **"Time Frame"** as a product name, and
-- the **TF logo** in `Assets.xcassets/AppIcon.appiconset/`
-
-If you distribute a modified build, change the name and the icon so users can tell your version from
-this one. This is the usual convention for MIT projects, not an extra restriction on the code — the
-code itself remains fully MIT.
+MIT licenses the **code**. It does not grant rights to the product name "Time Frame" or to the app
+icon in `time_frame/Assets.xcassets/AppIcon.appiconset/`. If you distribute a modified build,
+change the name and the icon so users can tell your version from this one. This is the usual
+convention for MIT projects, not an extra restriction on the code.

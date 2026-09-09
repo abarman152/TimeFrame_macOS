@@ -3,85 +3,104 @@
 Screenshots of the Time Frame macOS application. **Every image here is a real capture of the
 running app.** Nothing is a mockup, a render, or a placeholder.
 
+## Capture environment
+
+| | |
+|---|---|
+| Captured | 2026-09-09 (twelve screens); 2026-09-07 (`menu-bar` and the two editor screens) |
+| Build | Debug, from source at the current `main` |
+| System | macOS 27, Dark Mode |
+| Window size | 1180 x 800 points on a 2x Retina display, so **2360 x 1600 pixels** in every file |
+| Capture method | `screencapture -x -R<window frame>`, one screen at a time, with the sidebar selection **verified through the accessibility API before each capture** |
+| Store | An isolated SwiftData store under the session's temporary directory, via `TIMEFRAME_STORE_DIRECTORY`. The production store at `~/Library/Application Support/default.store` was never opened. |
+
+The system accent colour on the capture machine is purple; the app takes its accent from the
+system, so on a machine set to blue these screens render blue. That is `TFPalette` following
+`Color.accentColor` as intended, not a hard-coded palette. The sidebar's background tint follows
+the desktop picture, which is why captures made on different days differ slightly in hue.
+
+## Sample data
+
+The data shown is **fictional sample data** created for the capture: five configurations, six
+task templates, three session plans, and roughly one month of completed session history. There
+are no real names, no real email addresses, and no real calendar content in any image.
+
 ## What is captured
-
-Captured on 2026-09-07 from a Debug build of the Milestone 30 source, on macOS 27, in Dark Mode,
-at a window size of 1180 x 800 points (2x Retina, so 2360 x 1600 pixels). The system accent colour
-on the capture machine is purple; the app takes its accent from the system, so on a machine set to
-blue these screens render blue. That is `TFPalette` following `Color.accentColor` as intended, not
-a hard-coded palette.
-
-The data shown is sample data created for the capture — one template, "Deep Focus" / "Write the
-design document".
-
-> **Correction.** An earlier version of this note claimed the unsigned build "ran against its own
-> container". That is wrong. The macOS app is **not sandboxed**: its SwiftData store is
-> `~/Library/Application Support/default.store` and its preferences live in the
-> `abirbarman.com.time-frame` defaults domain. A locally built copy shares both with the installed
-> app. See ADR-109 and `docs/40-M31-...` for the data-loss defect this exposed.
 
 | File | Screen | Shows |
 |---|---|---|
-| `01-timer-idle.png` | Timer, idle | Page header with Quick Start, task field with Recent Tasks, the configuration card and its one-line summary, the compact session stepper, the filtered session-plan preview, and the compact Start with its "Enter a task to start." explanation |
-| `02-timer-running.png` | Timer, running | Task, configuration, phase, countdown, progress dots, session position, the four controls, next-interval line |
-| `03-timer-paused.png` | Timer, paused | Dimmed countdown with an explicit "Paused" label and icon; Pause becomes Resume |
-| `04-templates.png` | Templates, list | A card row with the chosen icon, the Pinned marker, the task, the configuration line, and trailing Start and overflow controls |
-| `05-template-detail.png` | Template detail | Icon, name, Edit and overflow beside the title, the Template Details card, the compact Start / Create Plan / pin switch row, and the Manage group |
-| `06-template-editor-new.png` | Template editor, create | The `TFSheetHeader`, real field labels with separate prompts, the icon picker, the configuration picker and its summary, and the session stepper |
-| `07-template-editor-edit.png` | Template editor, edit | The same editor opened from the detail page's **Edit**, correctly populated with the existing template (ADR-106) |
-| `08-menu-bar.png` | Menu bar popover, idle | The gear in the corner, the identity block, the Quick Start section with its pin count and one pinned row, and the Start Timer fallback — with no scrolling region |
+| `active-session.png` | Timer, running | Task, configuration, phase, countdown, progress dots, session position, the four transport controls, next-interval line |
+| `session-setup.png` | Timer, idle | Page header with Quick Start, task field with Recent Tasks, the configuration card and its one-line summary, the session stepper, the filtered interval preview, and the compact Start |
+| `timer-paused.png` | Timer, paused after relaunch | The "Welcome back — your session was restored" notice, the dimmed frozen countdown with an explicit "Paused" label and icon, and Resume in place of Pause. The remaining time is identical to the value before the app was quit, which is the recovery behaviour, captured rather than described. |
+| `configurations.png` | Configurations | Five configurations from 15 to 90 minutes of focus, each showing all five values in one strip, with the default marked |
+| `templates.png` | Templates, list | Six templates, each with its chosen icon, task, configuration line, pin marker, and trailing Start and overflow controls |
+| `template-detail.png` | Template detail | Icon, name, Edit and overflow beside the title, the Template Details card, the Start / Create Plan / pin switch row, and the Manage group |
+| `template-editor-new.png` | Template editor, create | The `TFSheetHeader`, field labels with separate prompts, the icon picker, the configuration picker and its summary, and the session stepper |
+| `template-editor-edit.png` | Template editor, edit | The same editor opened from the detail page's **Edit**, correctly populated with the existing template (ADR-106) |
+| `plans.png` | Plans, list | Three plans with session count, total duration, and configuration ("Custom" where a plan mixes them) |
+| `plan-detail.png` | Plan detail | The Plan Details card, the full ordered timeline with start offsets and per-interval configurations, and the Start / Add to Calendar / pin row |
+| `history.png` | History | Sessions grouped by day, newest first, each day heading stating that day's completed focus time; frozen configuration names and per-session status |
+| `statistics.png` | Statistics, This Month | Period picker, the four headline metrics, the trend against the previous period, the most productive day, and the Focus by Day chart |
+| `today.png` | Today | The in-progress card with its live countdown and Go to Timer action, and today's focus summary |
+| `settings.png` | Settings | Open at Login, Default Configuration, Calendar, and Notifications sections |
+| `menu-bar.png` | Menu bar popover, idle | The gear in the corner, the identity block, the Quick Start section with its pin count and one pinned row, and the Start Timer fallback — with no scrolling region |
 
 ## What is not captured
 
-No image exists yet for: Plans (list and detail), the Plan editor, Configurations, the
-Configuration editor, History, Statistics, Today, Settings, the session-complete state, or the menu
-bar popover while a session runs.
+No image exists yet for: the Plan editor, the Configuration editor, the History detail page, the
+session-complete state, or the menu bar popover **while a session runs**. The running popover
+could not be captured reliably: a `MenuBarExtra(.window)` popover does not stay open for a
+synthesised accessibility press, so the idle capture above is the one that could be taken and
+verified by hand.
 
-These screens were **not** captured rather than captured badly. Batch capture through the
-accessibility API proved unreliable in this session — the sidebar selection and the screenshot
-raced, so a run produced images that lagged one screen behind the selection. Every image in the
-table above was taken individually and inspected before being committed; the rest were discarded
-instead of being shipped mislabelled.
-
-They remain covered by the written descriptions in the
+These screens remain covered by the written descriptions in the
 [macOS User Guide](../../../35-MACOS-USER-GUIDE.md), which come from direct inspection of the
 running application.
 
 ## What was verified live, beyond the images
 
-The following were exercised in the running application during the Milestone 30 session, not
-merely inspected:
+The following were exercised in the running application during the capture session, not merely
+inspected:
 
 | Flow | Result |
 |---|---|
-| Create a template | Saved; appears in the list with its icon, task and configuration line |
-| **Template detail → Edit** | The editor sheet opens over the detail page, correctly populated (this is the ADR-106 defect, confirmed fixed on screen) |
-| Edit → rename → Save | The detail page, the window title and the list all update immediately; **no duplicate row is created**; task, configuration, icon and session count are preserved |
-| Pin to Quick Start | The Pinned marker appears in the list, and the pin reaches the menu bar's Quick Start section without an app restart |
-| Start from the menu bar's Quick Start | A session starts through the existing seam and the Timer screen shows it running |
-| Pause | Responds immediately; the countdown freezes and stays frozen (checked again minutes later, still frozen) |
-| Resume (Space) | Responds immediately; the countdown resumes from the frozen value |
-| Stop | Returns to the setup screen, and the completed run appears in Recent Tasks |
-| CPU while a session runs | 0.0–2.7% steady, with brief transients on interaction |
-| CPU while paused | 0.0% — the heartbeat stops rather than idling (M26) |
+| Launch against an isolated store | Opens the seeded library; the production store is untouched |
+| Start a session from the Timer screen | Runs through the existing setup path; the countdown is derived, not counted |
+| Switch configuration before starting | The interval preview re-derives immediately |
+| Open a template's detail page | Populated correctly, with Start, Create Plan, pin switch and Manage group |
+| Open a plan's detail page | The full timeline renders with per-interval configurations and start offsets |
+| Statistics period change (Today → This Month) | Re-aggregates from the same history; no second data source |
+| History over a month of sessions | Grouped by day with per-day focus totals and frozen configuration names |
+| Pause, then quit and relaunch the app | The session is restored with the remaining time unchanged to the second, and the app reports that it restored it |
+| Relaunch with the window closed | The app stays in the menu bar; activating it recreates exactly one window |
 
-## How to capture the remaining screens
+Earlier sessions additionally verified template creation, rename, pinning, Quick Start from the
+menu bar, pause/resume/stop, and CPU behaviour (0.0–2.7% while running, 0.0% while paused).
+
+## How to capture more screens
 
 Screen Recording and Accessibility must both be granted to the application that runs the tooling
-(System Settings, Privacy and Security), and it must be quit and reopened for the grants to take
-effect. Then, with Time Frame running:
+(System Settings ▸ Privacy & Security), and it must be quit and reopened for the grants to take
+effect. Then, with Time Frame running against an isolated store:
 
 ```bash
-screencapture -x -R80,60,1180,800 docs/assets/screenshots/macos/09-plans.png
+TIMEFRAME_STORE_DIRECTORY=/tmp/timeframe-shots open -n "Time Frame.app"
 ```
 
-Select the screen first, confirm on screen that the selection actually changed, and only then
-capture — a scripted select-then-capture loop is what produced the off-by-one images described
-above.
+Position the window at exactly 1180 x 800 points on a 2x display, select the screen, **confirm
+through the accessibility API that the selection actually changed**, and only then capture the
+window's own frame:
+
+```bash
+screencapture -x -R<x>,<y>,1180,800 docs/assets/screenshots/macos/<name>.png
+```
+
+A scripted select-then-capture loop without that confirmation step is what produced off-by-one
+images in an earlier session; every file above was verified after capture.
 
 ## Verification status
 
 - Application verified: yes, built, launched and driven.
-- Screenshot verified: yes, for the eight files listed above; each was inspected after capture.
-- Remaining screens: described in the User Guide, not yet photographed.
+- Screenshot verified: yes, for every file listed above; each was inspected after capture.
+- Sample data: fictional, created for the capture. No personal or private information.
 - Fabricated images: none.

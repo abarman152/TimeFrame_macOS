@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/time-frame-logo.png" alt="Time Frame" width="88">
+  <img src="assets/app-icon.png" alt="Time Frame" width="88">
   <h1>Time Frame Documentation</h1>
 </div>
 
